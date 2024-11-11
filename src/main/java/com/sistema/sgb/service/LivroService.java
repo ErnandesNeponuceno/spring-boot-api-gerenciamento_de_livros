@@ -28,7 +28,10 @@ public class LivroService {
     private CategoriaRepository categoriaRepository;
 
     public List<LivroDTO> listarTodos() {
-        return repository.listarTodos();
+    List<Livro> livros = repository.findAll();
+    return livros.stream()
+            .map(this::convertToDTO)
+            .toList();
     }
 
     public LivroDTO listarPorId(Long id) {
